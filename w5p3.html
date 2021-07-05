@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Week 5, Project 3: Monster Game - Keeping Score</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>		
+	<h1 tabindex="-1">Week 5, Project 3: Monster Game - Keeping Score</h1>	
+	<p>Open doors to reveal monsters or socks. If you make it to the end without hitting socks, you win. If you hit socks before then, you lose!</p>
+	<p id="stats"><strong>Wins:</strong> <span id="wins">0</span>&nbsp; <strong>Losses:</strong> <span id="losses">0</span></p>
+	<div aria-hidden="true">
+		<ul id="progress-indicator" class="progress-indicator">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<p><strong>Found monsters:</strong> <span id="monsters-found">0</span> of 11</p>
+	</div>
+	<div id="announcements" class="visually-hidden" aria-live="polite"></div>
+	<div id="app"></div>
+	<div id="winlose" class="winlose" aria-live="polite"></div>
+	
+	<footer>
+		<hr>
+		<p class="text-small text-muted">Icons by <a href="https://thenounproject.com/term/door/311732/">Jamie Dickinson</a>, <a href="https://thenounproject.com/term/monster/184225/">Nicky Knicky</a>, <a href="https://thenounproject.com/term/monster/1510400/">Alvaro Cabrera</a>, <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>, <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>, <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>, <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>, <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a>, <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a>, and <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a>.</p>
+	</footer>
+
+	<p><a href="js/w5p3.js">View project JS</a></p>	
+						
+	<script src="js/w5p3.js"></script>
+</body>
+</html>
+		

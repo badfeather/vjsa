@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Week 1, Project 3: Toggle Password Visibility in Multiple Forms</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>		
+	<h1>Week 1, Project 3: Toggle Password Visibility in Multiple Forms</h1>
+<h2>Change Username</h2>
+
+	<p>Enter your username and password to change your username.</p>
+	
+	<form>
+	  <div>
+	    <label for="username">Username</label>
+	    <input type="text" name="username" id="username">
+	  </div>
+	
+	  <div>
+	    <label for="password">Password</label>
+	    <input type="password" data-type="password" name="password" id="password">
+	  </div>
+	
+	  <div>
+	    <label for="show-password">
+	      <input type="checkbox" data-type="password-toggle" name="show-password" id="show-password">
+	      Show password
+	    </label>
+	  </div>
+	
+	  <p>
+	    <button type="submit">Change Username</button>
+	  </p>
+	</form>
+	
+	<h2>Change Password</h2>
+	
+	<p>Enter your current password and new password below.</p>
+	
+	<form>
+	  <div>
+	    <label for="current-password">Current Password</label>
+	    <input type="password" data-type="password" name="current-password" id="current-password">
+	  </div>
+	
+	  <div>
+	    <label for="new-password">New Password</label>
+	    <input type="password" data-type="password" name="new-password" id="new-password">
+	  </div>
+	
+	  <div>
+	    <label for="show-passwords">
+	      <input type="checkbox" data-type="password-toggle" name="show-passwords" id="show-passwords">
+	      Show passwords
+	    </label>
+	  </div>
+	
+	  <p>
+	    <button type="submit">Change Passwords</button>
+	  </p>
+	</form>
+	
+	<p><a href="js/w1p3.js">View project JS</a></p>	
+						
+	<script src="js/w1p3.js"></script>
+</body>
+</html>
+		
