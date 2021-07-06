@@ -80,11 +80,11 @@ button {
 
 form {
 	background: #efefef;
-	padding: 2rem;
+	padding: 1.5em;
 }
 
 form div {
-	margin-bottom: 1rem;
+	margin-bottom: 1em;
 }
 
 input[type="password"],
@@ -205,7 +205,7 @@ button[disabled]:focus {
 .note {
 	margin-bottom: 1.5em;
 	background-color: #eee;
-	padding: 1em;
+	padding: 1.5em;
 }
 
 .note-text {
