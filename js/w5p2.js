@@ -74,7 +74,6 @@ let monsters = [
 ];
 
 let app = document.querySelector('#app');
-let imagePath = 'https://gist.githubusercontent.com/cferdinandi/d40f6a589c60eeb7fa10de9cca212cec/raw/29eaac94f4201691cf31d76787c6f867838d63f0/';
 shuffle(monsters);
 
 function loadGame() {
@@ -85,7 +84,7 @@ function loadGame() {
 	<div class="row">
 		${monsters.map(function (monster, index) {		
 			return `<div class="grid" aria-live="polite">
-				<button class="open-door" onclick="openDoor(this, ${index})"><span class="visually-hidden">Open door</span><img alt="Closed door" src="${imagePath}door.svg"></button>
+				<button class="open-door" onclick="openDoor(this, ${index})"><span class="visually-hidden">Open door</span><img alt="Closed door" src="img/door.svg"></button>
 			</div>`;
 		}).join('')}
 	</div>`;
@@ -95,7 +94,7 @@ function openDoor(el, index) {
 	let grid = el.parentNode;
 	let monster = monsters[index];
 	let img = document.createElement('img');
-	img.src = `${imagePath}${monster.name}.svg`;
+	img.src = `img/${monster.name}.svg`;
 	img.alt = monster.alt;
 	el.replaceWith(img);
 

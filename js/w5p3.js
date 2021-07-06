@@ -85,7 +85,6 @@ let progressIndicator = document.getElementById('progress-indicator');
 let indicators = progressIndicator.querySelectorAll('li');
 let found = 0;
 let monstersFound = document.getElementById('monsters-found');
-let imagePath = 'https://gist.githubusercontent.com/cferdinandi/d40f6a589c60eeb7fa10de9cca212cec/raw/29eaac94f4201691cf31d76787c6f867838d63f0/';
 shuffle(monsters);
 
 function loadGame() {
@@ -105,7 +104,7 @@ function loadGame() {
 	<div class="row">
 		${monsters.map(function (monster, index) {		
 			return `<div class="grid">
-				<button class="open-door" onclick="openDoor(this, ${index})"><img alt="Door ${index}" src="${imagePath}door.svg"></button>
+				<button class="open-door" onclick="openDoor(this, ${index})"><img alt="Door ${index}" src="img/door.svg"></button>
 			</div>`;
 		}).join('')}
 	</div>`;
@@ -115,7 +114,7 @@ function openDoor(el, index) {
 	let grid = el.parentNode;
 	let monster = monsters[index];
 	let img = document.createElement('img');
-	img.src = `${imagePath}${monster.name}.svg`;
+	img.src = `img/${monster.name}.svg`;
 	img.alt = monster.alt;
 	el.replaceWith(img);
 
