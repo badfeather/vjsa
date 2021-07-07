@@ -108,7 +108,7 @@ function deleteNote( el ) {
 }
 
 function deleteAllNotes() {
-	localStorage.setItem( 'notes2', '{}' );
+	localStorage.removeItem('notes2');
 	notesList.innerHTML = '';
 	showStatus( 'All notes deleted.' );
 }

@@ -86,5 +86,11 @@ function deleteNote( el ) {
 	localStorage.setItem( 'notes', JSON.stringify( notes ) );
 }
 
+function deleteAllNotes() {
+	localStorage.removeItem( 'notes' );
+	notesList.innerHTML = '';
+	showStatus( 'All notes deleted.' );
+}
+
 loadNotes();
 form.addEventListener( 'submit', addNote );
