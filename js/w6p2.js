@@ -77,7 +77,12 @@ function createNoteListing( note ) {
 	li.id = note.timestamp;
 	let date = new Date();
 	Date.parse( note.timestamp );
-	time = date.toUTCString();
+	//time = date.toUTCString();
+	time = date.toLocaleString(navigator.language, {
+		dateStyle: 'long',
+		timeStyle: 'short',
+		hour12: true
+	});
 	li.classList.add( 'note' );	
 	li.innerHTML = `
 	<h3 class="note-title">${note.title}</h3>
