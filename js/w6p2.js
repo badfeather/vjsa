@@ -38,7 +38,10 @@ noteText,
 storedNotes,
 li,
 note,
+time,
+date,
 form = document.getElementById( 'notebook' ),
+timestamp = document.getElementById( 'timestamp' ),
 notesList = document.getElementById( 'notes-list' ),
 notifications = document.getElementById( 'notifications' ),
 notes = [];
@@ -71,10 +74,14 @@ function loadNotes() {
 
 function createNoteListing( note ) {
 	li = document.createElement( 'li' );
-	li.id = note.id;
+	li.id = note.timestamp;
+	let date = new Date();
+	Date.parse( note.timestamp );
+	time = date.toUTCString();
 	li.classList.add( 'note' );	
 	li.innerHTML = `
 	<h3 class="note-title">${note.title}</h3>
+	<p class="note-time"><small>${time}</small></p>
 	<p class="note-text">${note.text}</p>
 	<div class="delete-note"><button onclick="deleteNote(this)">Delete note</button></div>`;
 	notesList.appendChild( li );
@@ -82,6 +89,7 @@ function createNoteListing( note ) {
 
 function addNote( event ) {
 	event.preventDefault();
+	timestamp.value = Date.now();
 	data = new FormData( form );
 	note = serialize( data );
 	console.log( 'Adding note: ' + note );
@@ -100,7 +108,7 @@ function deleteNote( el ) {
 	// delete note with matching parent id from notes array
 	// https://stackoverflow.com/a/37428681/1582771
 	notes = notes.filter(function( obj ) {
-	  return obj.id !== parentId;
+	  return obj.timestamp !== parentId;
 	});
 	parentLi.remove();
 	showStatus( 'Note deleted.' );
