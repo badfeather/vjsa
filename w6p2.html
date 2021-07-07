@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Week 6, Project 2: Notebook App - Multiple Fields</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>		
+	<p><a href="./index.html">Projects home</a></p>	
+	<h1>Week 6, Project 2: Notebook App - Multiple Fields</h1>	
+	<form id="notebook">
+		<input type="hidden" name="id" value="Date.now()">
+		<p><small>* indicates required</small></p>
+		<p>
+			<label for="title">Title*</label>
+			<input type="text" id="title" name="title" required>
+		</p>
+		<p>
+			<label for="note">New note*</label>
+			<textarea id="note" name="note" required></textarea>
+		</p>
+		
+		<button>Save note</button>
+	</form>
+	
+	<h2>My Notes</h2>
+	<ul class="notes-list" id="notes-list">
+	</ul>
+	
+	<div id="notifications"></div>
+	
+	<p><a href="js/w6p2.js">View project JS</a></p>	
+						
+	<script src="js/w6p2.js"></script>
+</body>
+</html>
+		
