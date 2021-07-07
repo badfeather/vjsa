@@ -58,7 +58,7 @@ function showStatus( message ) {
 }
 
 function loadNotes() {
-	storedNotes = localStorage.getItem( 'notes' );
+	storedNotes = localStorage.getItem( 'notes2' );
 	// this needs work - not sure why '{}' was getting returned when noting had been set yet.
 	if ( storedNotes === null || storedNotes && Object.keys(storedNotes).length === 0 || '{}' === storedNotes ) return;
 	console.log( 'Stored notes: ' + storedNotes );
@@ -87,7 +87,7 @@ function addNote( event ) {
 	console.log( 'Adding note: ' + note );
 	notes.push( note );
 	createNoteListing( note );
-	localStorage.setItem( 'notes', JSON.stringify( notes ) );
+	localStorage.setItem( 'notes2', JSON.stringify( notes ) );
 	showStatus( 'New note added.' );
 	form.reset();
 }
@@ -104,11 +104,11 @@ function deleteNote( el ) {
 	});
 	parentLi.remove();
 	showStatus( 'Note deleted.' );
-	localStorage.setItem( 'notes', JSON.stringify( notes ) );
+	localStorage.setItem( 'notes2', JSON.stringify( notes ) );
 }
 
 function deleteAllNotes() {
-	localStorage.setItem( 'notes', '{}' );
+	localStorage.setItem( 'notes2', '{}' );
 	notesList.innerHTML = '';
 	showStatus( 'All notes deleted.' );
 }
