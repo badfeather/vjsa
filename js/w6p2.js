@@ -92,7 +92,6 @@ function addNote( event ) {
 	form.reset();
 }
 
-
 function deleteNote( el ) {
 	let parentLi = el.closest( 'li' );
 	console.log( parentLi );
@@ -106,6 +105,12 @@ function deleteNote( el ) {
 	parentLi.remove();
 	showStatus( 'Note deleted.' );
 	localStorage.setItem( 'notes', JSON.stringify( notes ) );
+}
+
+function deleteAllNotes() {
+	localStorage.setItem( 'notes', '{}' );
+	notesList.innerHTML = '';
+	showStatus( 'All notes deleted.' );
 }
 
 loadNotes();
