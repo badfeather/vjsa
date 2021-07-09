@@ -110,7 +110,7 @@
 				</tr>	
 				<tr>
 					<th>Wind</th>
-					<td>${weather.wind_spd} mph, ${weather.wind_cdir_full}</td>
+					<td>${weather.wind_spd} mph, ${weather.wind_cdir}</td>
 				</tr>
 				<tr>
 					<th>UV Index</th>
