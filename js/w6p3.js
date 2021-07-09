@@ -41,7 +41,7 @@
 			<h2>Local weather in ${weather.city_name}, ${weather.state_code} at ${formatDate}</h2>
 			<table class="weather-data">
 				<tr>
-					<th>Current Weather</th>
+					<th>Current Outlook</th>
 					<td><img src="${iconPath}${weather.weather.icon}.png" alt="" width="30" height="30"> ${weather.weather.description}</td>
 				</tr>
 				<tr>
