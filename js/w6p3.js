@@ -37,6 +37,21 @@
 				timeStyle: 'short',
 				hour12: true
 			});
+			let aqi = weather.aqi;
+			let quality = '';
+			if ( aqi <= 50 ) {
+				quality = 'good';
+			} else if ( aqi <= 100 ) {
+				quality = 'moderate';
+			} else if ( aqi <= 150 ) {
+				quality = 'unhealthy for sensitive groups';
+			} else if ( aqi <= 200 ) {
+				quality = 'unhealthy';
+			} else if ( aqi <= 300 ) {
+				quality = 'very unhealthy';
+			} else if ( aqi <= 500 ) {
+				quality = 'hazardous';
+			}
 			app.innerHTML = `
 			<h2>Local weather in ${weather.city_name}, ${weather.state_code} on ${formatDate}</h2>
 			<table class="weather-data">
@@ -82,7 +97,7 @@
 				</tr>	
 				<tr>
 					<th>Air Quality</th>
-					<td>${weather.aqi}</td>
+					<td>${aqi} (${quality})</td>
 				</tr>	
 				<tr>
 					<th>Dew Point</th>
