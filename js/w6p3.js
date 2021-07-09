@@ -41,13 +41,17 @@
 			<h2>Local weather in ${weather.city_name}, ${weather.state_code} at ${formatDate}</h2>
 			<table class="weather-data">
 				<tr>
-					<th>Today&rsquo;s Weather</th>
+					<th>Current Weather</th>
 					<td><img src="${iconPath}${weather.weather.icon}.png" alt="" width="30" height="30"> ${weather.weather.description}</td>
 				</tr>
 				<tr>
 					<th>Current Temperature</th>
 					<td>${weather.temp}&deg; F</td>
 				</tr>	
+				<tr>
+					<th>Feels Like</th>
+					<td>${weather.app_temp}&deg; F</td>
+				</tr>
 				<tr>
 					<th>Humidity</th>
 					<td>${weather.rh}%</td>
