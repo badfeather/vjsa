@@ -9,6 +9,7 @@
 	let endpoint = 'https://api.weatherbit.io/v2.0/current';
 	let apiKey = 'e777313cc4834a5f8a16306e0de2c6e6';
 	let iconPath = 'https://www.weatherbit.io/static/img/icons/';
+	let q;
 		
 	/**
 	 * Log an error message
@@ -17,6 +18,46 @@
 	function logError(error) {
 		app.textContent = 'Sorry, there was an error fetching your weather data.';
 		console.warn(error);
+	}
+	
+	function getAirQualityDesc(aqi) {
+		q = false;
+		if ( ! aqi ) {
+			return q;
+		}
+		if ( aqi > 300 ) {
+			q = 'hazardous';
+		} else if ( aqi > 200 ) {
+			q = 'very unhealthy';
+		} else if ( aqi > 150 ) {
+			q = 'unhealthy';
+		} else if ( aqi > 100 ) {
+			q = 'unhealthy for sensitive groups';
+		} else if ( aqi > 50 ) {
+			q  = 'moderate';
+		} else {
+			q = 'good';
+		}
+		return q;
+	}
+	
+	function getUviDesc(uv) {
+		q = false;
+		if ( ! uv ) {
+			return q;
+		}
+		if ( uv >= 11 ) {
+			q = 'very high risk';
+		} else if ( uv >= 8 ) {
+			q = 'high risk';
+		} else if ( uv >= 6 ) {
+			q = 'moderate risk';
+		} else if ( uv >= 3 ) {
+			q = 'low risk';
+		} else {
+			q = 'minimal risk';
+		}
+		return q;
 	}
 	
 	function renderWeather(pos) {	
@@ -37,26 +78,14 @@
 				timeStyle: 'short',
 				hour12: true
 			});
-			let aqi = weather.aqi;
-			let quality = '';
-			if ( aqi <= 50 ) {
-				quality = 'good';
-			} else if ( aqi <= 100 ) {
-				quality = 'moderate';
-			} else if ( aqi <= 150 ) {
-				quality = 'unhealthy for sensitive groups';
-			} else if ( aqi <= 200 ) {
-				quality = 'unhealthy';
-			} else if ( aqi <= 300 ) {
-				quality = 'very unhealthy';
-			} else if ( aqi <= 500 ) {
-				quality = 'hazardous';
-			}
+			let aqiDesc = getAirQualityDesc(weather.aqi);
+			let uvDesc = getUviDesc(weather.uv);
+			
 			app.innerHTML = `
 			<h2>Local weather in ${weather.city_name}, ${weather.state_code} on ${formatDate}</h2>
 			<table class="weather-data">
 				<tr>
-					<th>Current Outlook</th>
+					<th>Outlook</th>
 					<td><img src="${iconPath}${weather.weather.icon}.png" alt="" width="30" height="30"> ${weather.weather.description}</td>
 				</tr>
 				<tr>
@@ -85,7 +114,7 @@
 				</tr>
 				<tr>
 					<th>UV Index</th>
-					<td>${weather.uv}</td>
+					<td>${weather.uv}  (${uvDesc})</td>
 				</tr>	
 				<tr>
 					<th>Visibility</th>
@@ -97,7 +126,7 @@
 				</tr>	
 				<tr>
 					<th>Air Quality</th>
-					<td>${aqi} (${quality})</td>
+					<td>${weather.aqi} (${aqiDesc})</td>
 				</tr>	
 				<tr>
 					<th>Dew Point</th>
