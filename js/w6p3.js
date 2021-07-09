@@ -38,7 +38,7 @@
 				hour12: true
 			});
 			app.innerHTML = `
-			<h2>Local weather in ${weather.city_name}, ${weather.state_code} at ${formatDate}</h2>
+			<h2>Local weather in ${weather.city_name}, ${weather.state_code} on ${formatDate}</h2>
 			<table class="weather-data">
 				<tr>
 					<th>Current Outlook</th>
