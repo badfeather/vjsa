@@ -45,7 +45,7 @@
 					<td><img src="${iconPath}${weather.weather.icon}.png" alt="" width="30" height="30"> ${weather.weather.description}</td>
 				</tr>
 				<tr>
-					<th>Current Temperature</th>
+					<th>Temperature</th>
 					<td>${weather.temp}&deg; F</td>
 				</tr>	
 				<tr>
