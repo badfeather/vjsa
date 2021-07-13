@@ -10,7 +10,16 @@ function sanitizeHTML(str) {
 	});
 }
 
-function forecast( appSelector, apiKey, iconPath, errorMsg, lang, units ) {
+/**
+ * Get the weather forecast
+ * @param {string} appSelector - The selector for the container where the forecast should render, defaults to '#app'
+ * @param {string} apiKey - The weather API key
+ * @param {boolean} iconPath -  The path for the weather icons
+ * @param {string} errorMsg - The error message to display if there is an error retrieving weather data
+ * @param {string} lang - The two-letter language code, defaults to 'en'
+ * @param {string} units - The units to use ('M' for metric, 'I' for fahrenheit, 'S' for scientific), defaults to 'I'
+ */
+function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units ) {
 	let geo = navigator.geolocation;
 	let app = document.querySelector( appSelector );
 	// bail early if geolocation isn't supported
