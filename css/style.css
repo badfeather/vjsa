@@ -24,7 +24,8 @@ article,
 .article,
 .article-content,
 .row,
-table {
+table,
+details {
 	margin: 0 0 1.5rem;
 }
 
@@ -252,4 +253,15 @@ button[disabled]:focus {
 	width: 100%;
 	text-align: left;
 }
+
+summary {
+	margin-bottom: .75em;
+	font-weight: bold;
+}
+
+summary img {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 
