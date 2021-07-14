@@ -14,15 +14,20 @@ function sanitizeHTML(str) {
  * Get the weather forecast
  * @param {string} appSelector - The selector for the container where the forecast should render, defaults to '#app'
  * @param {string} apiKey - The weather API key
- * @param {boolean} iconPath -  The path for the weather icons
- * @param {string} errorMsg - The error message to display if there is an error retrieving weather data
- * @param {string} lang - The two-letter language code, defaults to 'en'
- * @param {string} units - The units to use ('M' for metric, 'I' for fahrenheit, 'S' for scientific), defaults to 'I'
+ * @param {{
+ *		showIcon: boolean, // {boolean} whether to show the icon, default true
+ *		iconPath: string, // {string} url path to icons, default 'https://www.weatherbit.io/static/img/icons/'
+ *		errorMsg: string, // {string} error message to display on failure, default 'Unable to get weather data at this time.'
+ *		lang: string, // {string} language code, default 'en'
+ *		units: string, // {string} units ('M' for metric, 'I' for fahrenheit, 'S' for scientific), default 'I'
+ *		hours: number, // {number} number of hours to display (max 48), default 12
+ * }} args - optional arguments to override defaults
  */
-function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units ) {
+function forecast( appSelector = '#app', apiKey, args = {} ) {
 	let geo = navigator.geolocation;
 	let app = document.querySelector( appSelector );
 	// bail early if geolocation isn't supported
+	args = typeof args === 'object' ? args : {};
 	if (!geo) {
 		app.textContent = 'Sorry, geolocation is not supported by your browser';
 		return;
@@ -31,11 +36,24 @@ function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units
 		throw 'Please provide your api key.';
 		return;
 	}
+	let defaults = {
+		showIcon: true,
+		iconPath: 'https://www.weatherbit.io/static/img/icons/',
+		errorMsg: 'Unable to get weather data at this time.',
+		lang: 'en',
+		units: 'I',
+		hours: 12
+	};
+	let merged = Object.assign(defaults, args);
+	let {showIcon, iconPath, errorMsg, lang, units, hours} = merged;
 	let endpoint = 'https://api.weatherbit.io/v2.0/forecast/hourly';
-	iconPath = iconPath ? sanitizeHTML(iconPath) : 'https://www.weatherbit.io/static/img/icons/';
-	errorMsg = errorMsg ? sanitizeHTML(errorMsg) : 'Unable to get weather data at this time.';
-	lang = lang ? lang : 'en';
-	units = units === ('M' || 'S' || 'I') ? units : 'I';
+	showIcon = typeof showIcon === 'boolean' ? showIcon : true;
+	iconPath = sanitizeHTML(iconPath);
+	errorMsg = sanitizeHTML(errorMsg);
+	lang = sanitizeHTML(lang);
+	units = sanitizeHTML(units);
+	units = ['M', 'S', 'I'].includes(units) ? units : 'I';
+	hours = typeof hours === 'number' && hours <= 48 ? hours : 12;
 	let degreeName, speedName, distName, depthName;
 	switch (units) {
 		case 'M':
@@ -104,7 +122,7 @@ function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units
 		let i = 0;
 		html = `<h2>12 Hour Forecast for ${sanitizeHTML(data.city_name)}, ${sanitizeHTML(data.state_code)}</h2>`;
 		for (let hour of data.data) {
-			//console.log(JSON.stringify(hour));
+			console.log(JSON.stringify(hour));
 			time = new Date(sanitizeHTML(hour.ts) * 1000).toLocaleString(navigator.language);		
 			uv = sanitizeHTML(hour.uv);
 			uvDesc = getUviDesc(uv);
@@ -112,7 +130,7 @@ function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units
 			html += `
 			<details${i === 0 ? ' open' : ''}>
 				<summary>
-					${time}</th>: <img src="${iconPath}${sanitizeHTML(hour.weather.icon)}.png" alt="" width="30" height="30"> ${sanitizeHTML(hour.temp)}&deg; ${degreeName}, ${sanitizeHTML(hour.weather.description)}
+					${time}</th>: ${showIcon ? `<img src="${iconPath}${sanitizeHTML(hour.weather.icon)}.png" alt="" width="30" height="30"> `: ''}${sanitizeHTML(hour.temp)}&deg; ${degreeName}, ${sanitizeHTML(hour.weather.description)}
 
 				</summary>
 				<table class="hour-data">
@@ -186,4 +204,4 @@ function forecast( appSelector = '#app', apiKey, iconPath, errorMsg, lang, units
 	geo.getCurrentPosition(fetchWeather, noWeather);
 }
 
-forecast( '#app', 'e777313cc4834a5f8a16306e0de2c6e6', 'https://www.weatherbit.io/static/img/icons/' );
+forecast('#app', 'e777313cc4834a5f8a16306e0de2c6e6');
