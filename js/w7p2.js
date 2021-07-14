@@ -186,7 +186,7 @@ function forecast( appSelector = '#app', apiKey, args = {} ) {
 		let lat = pos.coords.latitude;
 		let lon = pos.coords.longitude;
 		// Make the API call
-		fetch(`${endpoint}?key=${apiKey}&units=I&lang=${lang}&lat=${lat}&lon=${lon}&hours=12`).then(function(response) {
+		fetch(`${endpoint}?key=${apiKey}&units=${units}&lang=${lang}&lat=${lat}&lon=${lon}&hours=${hours}`).then(function(response) {
 			if (response.ok) {
 				return response.json();
 			}
