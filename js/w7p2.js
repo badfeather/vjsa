@@ -44,8 +44,7 @@ function forecast( appSelector = '#app', apiKey, args = {} ) {
 		units: 'I',
 		hours: 12
 	};
-	let merged = Object.assign(defaults, args);
-	let {showIcon, iconPath, errorMsg, lang, units, hours} = merged;
+	let {showIcon, iconPath, errorMsg, lang, units, hours} = Object.assign(defaults, args);
 	let endpoint = 'https://api.weatherbit.io/v2.0/forecast/hourly';
 	showIcon = typeof showIcon === 'boolean' ? showIcon : true;
 	iconPath = sanitizeHTML(iconPath);
