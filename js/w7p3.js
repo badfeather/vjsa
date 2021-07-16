@@ -1,5 +1,16 @@
 /**
  * Get a date in the future (or past) from a timestamp
+ * @param {number} num - a positive or negative number
+ * @param {units} units - the time unit to use - options: 'hours', 'days', 'weeks', 'months', 'years'
+ * @param {number} timestamp - the timestamp - defaults to current timestamp
+ * @param {object} options - an object of toLocaleString options, defaults to:
+ *	{
+ *		locale: navigator.language,
+ *		format: {
+ *			dateStyle: 'long',
+ *			timeStyle: 'short',
+ *			hour12: true			
+ *	}
  * @return {String} A formatted date string
  */
 function getFutureOrPastDate(num, units, timestamp = new Date().getTime(), options = {}) {
