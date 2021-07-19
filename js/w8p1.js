@@ -7,18 +7,18 @@ let stamp = (function() {
 	 * @return {number} A future/past timestamp with n units added/subtracted	 	 
 	 */	
 	function addSubtractTime(n, units, timestamp = new Date().getTime()) {
-		let times = {
-			seconds: 1000,
-			minutes: 1000 * 60,
-			hours: 1000 * 60 * 60,
-			days: 1000 * 60 * 60 * 24,
-			weeks: 1000 * 60 * 60 * 24 * 7,
-			months: 1000 * 60 * 60 * 24 * 30,
-			years: 1000 * 60 * 60 * 24 * 365,
-		}
+		let seconds = 1000,
+			minutes = seconds * 60,
+			hours = minutes * 60,
+			days = hours * 24,
+			weeks = days * 7,
+			months = days * 30,
+			years = days * 365,
+			times = {seconds, minutes, hours, days, weeks, months, years};
 		if (!times[units] || !n || !timestamp) return;
 		return timestamp + n * times[units];				
 	}
+
 	
 	function addSubtractSeconds(n, timestamp) {
 		return addSubtractTime(n, 'seconds', timestamp);
@@ -93,7 +93,6 @@ let stamp = (function() {
 	 */	 
 	function getFuturePastDate(n, units, timestamp, options) {
 		let newTime = addSubtractTime(n, units, timestamp);
-		console.log(newTime);
 		return getDate(newTime, options);
 	}
 	
