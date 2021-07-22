@@ -35,8 +35,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n units added/subtracted	 	 
 	 */		
 	Constructor.prototype.addSubtractTime = function(n, units) {
-		if (!n) {
-		//if (typeof n !== 'number') {
+		if (isNaN(n)) {
 			console.log('n is empty, returning current timestamp');
 			return this.timestamp;
 		}
