@@ -24,7 +24,7 @@ let Stamp = (function() {
 		this.timestamp = ! isNaN(timestamp) ? timestamp : now;
 		this.dateLocale = locale ? locale : defaultLocale;
 		this.dateFormat = typeof format === 'object' ? Object.assign(defaultFormat, format) : defaultFormat;
-		this.date = new Date(timestamp).toLocaleString(this.dateLocale, this.dateFormat);
+		this.date = new Date(this.timestamp).toLocaleString(this.dateLocale, this.dateFormat);
 	}
 
 	/**
@@ -33,19 +33,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n units added/subtracted	 	 
 	 */		
 	Constructor.prototype.fromNow = function(n, units) {
-		if (isNaN(n)) {
-			console.log('n is empty, returning current timestamp');
-			return this;
-		}
-		if (!times[units]) {
-			console.log('units is not a valid time unit string, returning current timestamp');
-			return this;
-		}
-
-		newTime = this.timestamp + (n * times[units]);
-		this.timestamp = newTime;
-		this.date = new Date(newTime).toLocaleString(this.dateLocale, this.dateFormat);
-		return this;
+		return !isNaN(n) && times[units] ? new Constructor(this.timestamp + (n * times[units])) : this;					
 	}
 
 	/**
@@ -54,8 +42,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n seconds added/subtracted	 	 
 	 */	
 	Constructor.prototype.secondsFromNow = function(n) {
-		this.fromNow(n, 'seconds');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.seconds)) : this;
 	}
 
 	/**
@@ -64,8 +51,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n minutes added/subtracted	 	 
 	 */		
 	Constructor.prototype.minutesFromNow = function(n) {
-		this.fromNow(n, 'minutes');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.minutes)) : this;
 	}
 
 	/**
@@ -74,8 +60,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n hours added/subtracted	 	 
 	 */		
 	Constructor.prototype.hoursFromNow = function(n) {
-		this.fromNow(n, 'hours');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.hours)) : this;
 	}
 
 	/**
@@ -84,8 +69,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n days added/subtracted	 	 
 	 */		
 	Constructor.prototype.daysFromNow = function(n) {
-		this.fromNow(n, 'days');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.days)) : this;
 	}
 
 	/**
@@ -94,8 +78,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n weeks added/subtracted	 	 
 	 */		
 	Constructor.prototype.weeksFromNow = function(n) {
-		this.fromNow(n, 'weeks');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.weeks)) : this;
 	}
 
 	/**
@@ -104,8 +87,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n months added/subtracted	 	 
 	 */		
 	Constructor.prototype.monthsFromNow = function(n) {
-		this.fromNow(n, 'months');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.months)) : this;
 	}
 
 	/**
@@ -114,8 +96,7 @@ let Stamp = (function() {
 	 * @return {number} A future/past timestamp with n years added/subtracted	 	 
 	 */		
 	Constructor.prototype.yearsFromNow = function(n) {
-		this.fromNow(n, 'years');
-		return this;
+		return !isNaN(n) ? new Constructor(this.timestamp + (n * times.years)) : this;
 	}
 	
 	// Export the constructor object
@@ -123,14 +104,14 @@ let Stamp = (function() {
 })();
 
 let now = new Stamp(),
-	addSubtractInFiveMin = new Stamp().fromNow(5, 'minutes'),
-	twentySecondsFromNow = new Stamp().secondsFromNow(20),
-	twentyMinutesFromNow = new Stamp().minutesFromNow(20),
-	threeHoursFromNow = new Stamp().hoursFromNow(3),
-	threeDaysFromNow = new Stamp().daysFromNow(3),
-	threeWeeksFromNow = new Stamp().weeksFromNow(3),
-	threeMonthsFromNow = new Stamp().monthsFromNow(3),
-	threeYearsFromNow = new Stamp().yearsFromNow(3);
+	addSubtractInFiveMin = now.fromNow(5, 'minutes'),
+	twentySecondsFromNow = now.secondsFromNow(20),
+	twentyMinutesFromNow = now.minutesFromNow(20),
+	threeHoursFromNow = now.hoursFromNow(3),
+	threeDaysFromNow = now.daysFromNow(3),
+	threeWeeksFromNow = now.weeksFromNow(3),
+	threeMonthsFromNow = now.monthsFromNow(3),
+	threeYearsFromNow = now.yearsFromNow(3);
 
 console.log(`Current Stamp: ${JSON.stringify(now)}`);
 console.log(`In 5 minutes using fromNow, timestamp: ${addSubtractInFiveMin.timestamp}, date: ${addSubtractInFiveMin.date}`);
