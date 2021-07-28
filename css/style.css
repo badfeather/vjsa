@@ -303,11 +303,11 @@ summary img {
 	border: 0;
 	background: transparent;
 	outline: 0;
-	font-size: 42px;
+	font-size: 3rem;
 	transition: font-size .2s;
 	padding: 0;
-	width: 84px;
-	height: 84px;
+	width: 6rem;
+	height: 6rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;	
@@ -316,7 +316,11 @@ summary img {
 .emoji-button:hover,
 .emoji-button:focus {
 	background: transparent;
-	font-size: 56px;
+	font-size: 4rem;
+}
+
+.emoji-button:active {
+	font-size: 5rem;
 }
 
 
