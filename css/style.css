@@ -275,4 +275,26 @@ summary img {
 	vertical-align: middle;
 }
 
+/* DICE ROLLER */
+.emoji-button {
+	border: 0;
+	background: transparent;
+	outline: 0;
+	font-size: 42px;
+	transition: font-size .2s;
+	padding: 0;
+	width: 84px;
+	height: 84px;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+}
+
+.emoji-button:hover,
+.emoji-button:focus {
+	background: transparent;
+	font-size: 56px;
+}
+
+
 
