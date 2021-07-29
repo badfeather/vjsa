@@ -10,8 +10,8 @@ html {
 
 body {
 	margin: 0 auto;
-	max-width: 40em;
-	width: 88%;
+	width: 100%;
+	max-width: 60em;
 	padding: 2em 1em;
 }
 
@@ -27,6 +27,11 @@ article,
 table,
 details {
 	margin: 0 0 1.5rem;
+}
+
+hr {
+	border-color: #ddd;
+	margin: 3rem 0;
 }
 
 .author {
@@ -321,6 +326,11 @@ summary img {
 
 .emoji-button:active {
 	font-size: 5rem;
+}
+
+.result {
+	background-color: #efefef;
+	padding: 1em;
 }
 
 
