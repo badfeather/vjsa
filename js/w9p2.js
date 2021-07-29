@@ -1,4 +1,6 @@
 let Dice = (function () {
+	let sides = [1, 2, 3, 4, 5, 6];
+	
 	/**
 	 * Randomly shuffle an array
 	 * https://stackoverflow.com/a/2450976/1293256
@@ -28,13 +30,10 @@ let Dice = (function () {
 	 * @param  {Node}        btn      The button to attach the listener to
 	 * @param  {Constructor} instance The current instantiation
 	 */
-	function createEventListener(btn, instance) {
-		/**
-		 * Handle click events
-		 */
+	function createEventListener(btn, result) {
 		function roll() {
-			instance._sides = shuffle(instance._sides);
-			instance._result.textContent = `You rolled a ${instance._sides[0]}`;
+			shuffle(sides);
+			result.textContent = `You rolled a ${sides[0]}`;
 		}
 
 		// Listen for clicks on the button
@@ -49,16 +48,14 @@ let Dice = (function () {
 		let btn = document.querySelector(btnSelector);
 		let result = document.querySelector(resultSelector);
 		if ( !btn || !result ) return;	
-		let sides = [1, 2, 3, 4, 5, 6];
 
 		// Create the event listener
-		createEventListener(btn, this);
+		createEventListener(btn, result);
 
 		// Set properties
 		Object.defineProperties(this, {			
 			_btn: {value: btn},
 			_result: {value: result},
-			_sides: {value: sides, writable: true}
 		});
 	}
 
