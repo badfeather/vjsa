@@ -377,7 +377,7 @@ summary img {
 .img-btn img {
 	width: 80%;
 	height: auto;
-	transition: width .2s;
+	animation: none;
 }
 
 .img-btn.hover-rotate:hover img,
