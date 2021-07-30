@@ -139,15 +139,28 @@ console.log(`In 3 months using monthsFromNow, timestamp: ${threeMonthsFromNow.ge
 console.log(`In 3 years using yearsFromNow, timestamp: ${threeYearsFromNow.getTimestamp()}, date: ${threeYearsFromNow.getDate()}`);
 console.log(`3 years, 3 months, 3 weeks, 3 hours, 3 minutes, and 3 seconds from now timestamp: ${testThemAll.getTimestamp()}, date: ${testThemAll.getDate()}`);
 
-
 // Time Traveler testing form
 let form = document.getElementById('form');
-let formNum = document.getElementById('number');
-let formUnits = document.getElementById('units');
 let results = document.getElementById('results');
+let years = document.getElementById('years');
+let months = document.getElementById('months');
+let weeks = document.getElementById('weeks');
+let days = document.getElementById('days');
+let hours = document.getElementById('hours');
+let minutes = document.getElementById('minutes');
+let seconds = document.getElementById('seconds');
+//let formTime = new Stamp();
+let mods = '';
 
 form.addEventListener('submit', function(event) {
 	event.preventDefault();
-	let formDate = new Stamp().fromNow(formNum.value, formUnits.value).getDate();	
-	results.innerText = `The date and time ${Number(formNum.value)} ${formUnits.value} from now will be ${formDate}`;
+	let formTime = now
+		.yearsFromNow(years.value)
+		.monthsFromNow(months.value)
+		.weeksFromNow(weeks.value)
+		.daysFromNow(days.value)
+		.minutesFromNow(minutes.value)
+		.secondsFromNow(seconds.value);
+
+	results.innerText = `The date and time in ${years.value} years, ${months.value} months, ${days.value} days, ${hours.value} hours, ${minutes.value} minutes, and ${seconds.value} seconds from now will be ${formTime.getDate()}`;
 });
