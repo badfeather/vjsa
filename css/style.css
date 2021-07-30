@@ -333,5 +333,57 @@ summary img {
 	padding: 1em;
 }
 
+@keyframes dierotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+.dice-container {
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	justify-content: space-between;
+}
+
+.img-btn {
+	background: transparent;
+	border: 0;
+	outline: 0;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	width: 140px;
+	padding: 1em;
+}
+
+
+.img-btn:hover,
+.img-btn:focus {
+	background: #ddd;
+	color: #000;
+}
+
+.btn-img {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.img-btn img {
+	width: 80%;
+	height: auto;
+	transition: width .2s;
+}
+
+.img-btn.hover-rotate:hover img,
+.img-btn.hover-rotate:focus img {
+	animation: dierotate 2s infinite linear;	
+}
+
 
 
