@@ -13,8 +13,8 @@ let Dice = (function () {
 	/**
 	 * Randomly shuffle an array
 	 * https://stackoverflow.com/a/2450976/1293256
-	 * @param  {Array} array The array to shuffle
-	 * @return {String}      The first item in the shuffled array
+	 * @param {array} array - The array to shuffle
+	 * @return {String} The first item in the shuffled array
 	 */
 	function shuffle(array) {
 		let currentIndex = array.length;
@@ -36,8 +36,9 @@ let Dice = (function () {
 
 	/**
 	 * Create an event listener
-	 * @param  {Node}        btn      The button to attach the listener to
-	 * @param  {Constructor} instance The current instantiation
+	 * @param {node} btn - The button to attach the listener to
+	 * @param {array} sides - an array of numbers representing the sides of a dice
+	 * @param {constructor} instance The current instantiation
 	 */
 	function createEventListener(btn, sides, result) {
 		function roll() {
@@ -51,9 +52,9 @@ let Dice = (function () {
 	
 	/**
 	 * Inject the button into the DOM
-	 * @param  {Node}   elem     The element to render the button into
-	 * @param  {Object} settings The settings for this instance
-	 * @return {Node}            The button
+	 * @param {Node} el - The element to render the button into
+	 * @param {Object} settings - The settings for this instance
+	 * @return {Node} An array of buttons with attached event listeners
 	 */
 	function createBtns(el, settings) {
 		for (n of settings.dice) {
@@ -73,7 +74,11 @@ let Dice = (function () {
 
 	/**
 	 * The constructor object
-	 * @param {String} selector The selector for the element to render into
+	 * @param {string} btnContainerSelector - The selector for the buttons to render into
+	 * @param {string} resultSelector - The selector for the results to render into
+	 * @param {object} options - An object of options to pass through, including:
+	 * - dice: {array} - expects an array of numbers representing sides of dice, defaults to [4,6,8,12,20]
+	 * - rotateHover: {boolean} - whether or not to apply a class to the buttons for a hover animation effect, defaults to true
 	 */
 	function Constructor(btnContainerSelector, resultSelector, options = {}) {
 		el = typeof(btnContainerSelector) === 'string' ? document.querySelector(btnContainerSelector) : el;
