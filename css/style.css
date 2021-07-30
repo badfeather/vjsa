@@ -345,6 +345,7 @@ summary img {
 .dice-container {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	align-items: end;
 	justify-content: space-between;
 }
@@ -358,6 +359,7 @@ summary img {
 	flex-direction: column;
 	width: 140px;
 	padding: 1em;
+	flex: 0 0 auto;
 }
 
 
