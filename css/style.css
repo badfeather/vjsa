@@ -303,6 +303,15 @@ summary img {
 	vertical-align: middle;
 }
 
+/* TIME TRAVELER */
+.time-traveler-form label {
+	display: inline-block;
+}
+
+.time-traveler-form input[type="number"] {
+	width: 3em;
+}
+
 /* DICE ROLLER */
 .emoji-button {
 	border: 0;
