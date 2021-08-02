@@ -64,7 +64,7 @@ let Dice = (function () {
 			});
 			btn.classList.add('die', 'img-btn');
 			if (settings.rotateHover) btn.classList.add('hover-rotate');
-			btn.innerHTML = `<span class"btn-img" aria-hidden="true"><img src="img/d${n}.svg" alt="" /></span><span class="btn-text">Roll a d${n}</span>`;
+			btn.innerHTML = `<img class="btn-img" src="img/d${n}.svg" alt="" /><span class="btn-text">Roll a d${n}</span>`;
 			el.append(btn);
 			createEventListener(btn, sides, result);
 			btns.push(btn);
