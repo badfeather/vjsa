@@ -111,5 +111,10 @@ let d20 = new Dice('#d20', '#result', {
 	sides: 20
 });
 
+let d20test = new Dice('#d20', '#result', {
+	message: 'test roll: {{roll}}',
+	sides: 20
+});
+
 //test roll
-d20.roll();
+d20test.roll();
