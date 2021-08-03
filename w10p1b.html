@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Week 10, Project 1: Dice Library - Public Methods</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css?v=7">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.css" rel="stylesheet" />
+	<link rel="icon" href="favicon.ico">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+
+<body>		
+	<p><a href="./index.html">Projects home</a></p>	
+	<h1>Week 10, Project 1b: Dice Library - Idiomatic JS Factory</h1>
+	
+	<p id="dice-container" class="dice-container">
+		<button class="die img-btn hover-rotate" id="d4"><img src="img/d4.svg" class="btn-img" alt="" /><span class="btn-text">Roll a D4</span></button>
+		<button class="die img-btn hover-rotate" id="d6"><img src="img/d6.svg" class="btn-img" alt="" /><span class="btn-text">Roll a D6</span></button>
+		<button class="die img-btn hover-rotate" id="d8"><img src="img/d8.svg" class="btn-img" alt="" /><span class="btn-text">Roll a D8</span></button>
+		<button class="die img-btn hover-rotate" id="d12"><img src="img/d12.svg" class="btn-img" alt="" /><span class="btn-text">Roll a D12</span></button>
+		<button class="die img-btn hover-rotate" id="d20"><img src="img/d20.svg" class="btn-img" alt="" /><span class="btn-text">Roll a D20</span></button>
+	</p>	
+	<p id="result" class="result" aria-live="polite">Roll the dice...</p>
+	<p>Illustrations source: <a href="https://en.wikipedia.org/wiki/Platonic_solid">Wikipedia - Platonic Solid</a></p>
+	<hr>
+	<h3>Project JS</h3>
+	<pre><code id="view-js" class="hljs language-js js"></code></pre>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+	<script src="js/viewjs.js"></script>
+	<script src="js/w10p1b.js"></script>
+	<script>
+		viewJS('js/w10p1b.js');
+	</script>
+</body>
+</html>
+			
