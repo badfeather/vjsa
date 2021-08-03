@@ -24,8 +24,9 @@ let Dice = (function () {
 	}
 	
 	function rollDie(instance) {
-		shuffle(instance.sidesArr);
-		instance.result.textContent = instance.message.replace('{{roll}}', instance.sidesArr[0]);
+		let sidesArrCpy = Array.from(instance.sidesArr);
+		shuffle(sidesArrCpy);
+		instance.result.textContent = instance.message.replace('{{roll}}', sidesArrCpy[0]);
 	}
 
 	/**
@@ -88,33 +89,28 @@ let Dice = (function () {
 })();
 
 let d4 = new Dice('#d4', '#result', {
-	message: '{{roll}}',
+	message: 'D4 roll: {{roll}}',
 	sides: 4
 });
 
 let d6 = new Dice('#d6', '#result', {
-	message: '{{roll}}'
+	message: 'D6 roll: {{roll}}'
 });
 
 let d8 = new Dice('#d8', '#result', {
-	message: '{{roll}}',
+	message: 'D8 roll: {{roll}}',
 	sides: 8
 });
 
 let d12 = new Dice('#d12', '#result', {
-	message: '{{roll}}',
+	message: 'D12 roll: {{roll}}',
 	sides: 12
 });
 
 let d20 = new Dice('#d20', '#result', {
-	message: '{{roll}}',
-	sides: 20
-});
-
-let d20test = new Dice('#d20', '#result', {
-	message: 'test roll: {{roll}}',
+	message: 'D20 roll: {{roll}}',
 	sides: 20
 });
 
 //test roll
-d20test.roll();
+d20.roll();

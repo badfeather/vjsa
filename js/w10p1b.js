@@ -55,33 +55,28 @@ function diceFactory(diceSelector, resultSelector, options = {}) {
 }
 
 let d4 = diceFactory('#d4', '#result', {
-	message: '{{roll}}',
+	message: 'D4 roll: {{roll}}',
 	sides: 4
 });
 
 let d6 = diceFactory('#d6', '#result', {
-	message: '{{roll}}'
+	message: 'D6 roll: {{roll}}'
 });
 
 let d8 = diceFactory('#d8', '#result', {
-	message: '{{roll}}',
+	message: 'D8 roll: {{roll}}',
 	sides: 8
 });
 
 let d12 = diceFactory('#d12', '#result', {
-	message: '{{roll}}',
+	message: 'D12 roll: {{roll}}',
 	sides: 12
 });
 
 let d20 = diceFactory('#d20', '#result', {
-	message: '{{roll}}',
-	sides: 20
-});
-
-let d20test = diceFactory('#d20', '#result', {
-	message: 'test roll: {{roll}}',
+	message: 'D20 roll: {{roll}}',
 	sides: 20
 });
 
 //test roll
-d20test.roll();
+d20.roll();
