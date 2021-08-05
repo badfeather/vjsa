@@ -98,6 +98,7 @@ let Dice = (function () {
 	 */
 	Constructor.prototype.destroy = function() {
 		this.destroyed = true;
+		result.textContent = '';
 		this.dice.removeEventListener('click', this.listener);
 	}
 
@@ -127,7 +128,3 @@ let d20 = new Dice('#d20', '#result', {
 	message: 'D20 roll: {{roll}}',
 	sides: 20
 });
-
-//test roll
-d20.roll();
-d20.destroy();
