@@ -73,7 +73,6 @@ let Dice = (function () {
 			sides: {value: sides},
 			message: {value: message},
 			listener: {value: listener},
-			destroyed: {value: false}
 		});
 	}
 
@@ -81,8 +80,7 @@ let Dice = (function () {
 	 * Roll the die
 	 */
 	Constructor.prototype.roll = function() {
-		let {sides, result, message, destroyed} = this;
-		if (destroyed) return;
+		let {sides, result, message} = this;
 
 		// Create sides of the dice
 		let sidesArr = Array.from(new Array(sides)).map(function(item, index) {
@@ -98,11 +96,11 @@ let Dice = (function () {
 	 * Destroy this instance
 	 */
 	Constructor.prototype.destroy = function() {
-		let {dice, result, destroyed} = this;
-		destroyed = true;
+		this.destroyed = true;
 		result.textContent = '';
-		dice.setAttribute('disabled', '');
-		dice.removeEventListener('click', this.listener);
+		this.dice.removeEventListener('click', this.listener);
+		this.dice.setAttribute('disabled', '');
+		this.roll = null;
 	}
 
 	return Constructor;

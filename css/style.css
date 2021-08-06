@@ -398,5 +398,18 @@ summary img {
 	animation: dierotate 2s infinite linear;	
 }
 
+.img-btn.hover-rotate:disabled img {
+	animation: none;
+}
+
+[data-sides] {
+	text-align: left;
+}
+
+[data-sides] th,
+[data-sides] td {
+	width: 50%;
+}
+
 
 
