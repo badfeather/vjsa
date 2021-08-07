@@ -1,6 +1,4 @@
-let Dice = (function () {
-	let side = 0;
-	
+let Dice = (function () {	
 	/**
 	 * Randomly shuffle an array
 	 * https://stackoverflow.com/a/2450976/1293256
@@ -87,7 +85,7 @@ let Dice = (function () {
 	/**
 	 * Roll the dielastRoll
 	 */
-	Constructor.prototype.roll = function() {
+	Constructor.prototype.roll = function() {			
 		let {sides, result, message, lastRoll} = this;
 
 		// Create sides of the dice
@@ -139,12 +137,11 @@ for (n of dice) {
 	app.append(div);
 }
 
-function counter(side, sides) {
+function counter(lastRoll, sides) {
 	let counter = document.querySelector(`[data-sides="${sides}"`);
-	//if (!counter) return;
-	let cell = counter.querySelector(`[data-side="${side}"`);
-	//if (!cell) return;
-	console.log('still here');
+	if (!counter) return;
+	let cell = counter.querySelector(`[data-side="${lastRoll}"`);
+	if (!cell) return;
 	let num = parseInt(cell.innerText, 10);
 	num++;
 	console.log(num);
