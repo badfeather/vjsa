@@ -81,11 +81,9 @@ let Dice = (function () {
 		dice.removeAttribute('disabled');
 
 		// Merge user options into defaults
-		let {sides, message, onRoll, onDestroy} = Object.assign({
+		let {sides, message} = Object.assign({
 			sides: 6,
 			message: `You rolled a {{roll}}.`,
-			onRoll: function() {},
-			onDestroy: function() {},
 		}, options);
 		
 		// Listen for clicks
@@ -207,34 +205,24 @@ document.addEventListener('dice:destroy', destroyMessage);
 let d4 = new Dice('#d4', '#result', {
 	message: 'D4 roll: {{roll}}',
 	sides: 4,
-	onRoll: counter,
-	onDestroy: destroyMessage,
 });
 
 let d6 = new Dice('#d6', '#result', {
 	message: 'D6 roll: {{roll}}',
 	sides: 6,
-	onRoll: counter,
-	onDestroy: destroyMessage,
 });
 
 let d8 = new Dice('#d8', '#result', {
 	message: 'D8 roll: {{roll}}',
 	sides: 8,
-	onRoll: counter,
-	onDestroy: destroyMessage,
 });
 
 let d12 = new Dice('#d12', '#result', {
 	message: 'D12 roll: {{roll}}',
 	sides: 12,
-	onRoll: counter,
-	onDestroy: destroyMessage,
 });
 
 let d20 = new Dice('#d20', '#result', {
 	message: 'D20 roll: {{roll}}',
 	sides: 20,
-	onRoll: counter,
-	onDestroy: destroyMessage,
 });
