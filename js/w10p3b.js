@@ -133,7 +133,7 @@ let Dice = (function () {
 			result: result,
 			message: message, 
 			lastRoll: lastRoll,
-			rolls: rolls
+			rolls: rolls,
 		});		
 		return this;
 	};
@@ -147,7 +147,8 @@ let Dice = (function () {
 			sides: sides,
 			result: result,
 			message: message, 
-			lastRoll: lastRoll
+			lastRoll: lastRoll,
+			rolls: rolls,
 		});	
 		if (canceled) return;	
 		result.textContent = '';
@@ -161,7 +162,8 @@ let Dice = (function () {
 			sides: sides,
 			result: result,
 			message: message, 
-			lastRoll: lastRoll
+			lastRoll: lastRoll,
+			rolls: rolls,
 		});	
 		return this;
 	}
