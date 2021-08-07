@@ -142,7 +142,7 @@ let Dice = (function () {
 	 * Destroy this instance
 	 */
 	Constructor.prototype.destroy = function() {
-		let {dice, result, sides, message, lastRoll} = this;
+		let {dice, result, sides, message, lastRoll, rolls} = this;
 		let canceled = !emitEvent('dice:before-destroy', {
 			sides: sides,
 			result: result,

@@ -1,4 +1,6 @@
 let Dice = (function () {	
+	let rollCount = 0;
+	
 	/**
 	 * Randomly shuffle an array
 	 * https://stackoverflow.com/a/2450976/1293256
@@ -78,7 +80,8 @@ let Dice = (function () {
 			listener: {value: listener},
 			onRoll: {value: onRoll},
 			onDestroy: {value: onDestroy},
-			lastRoll: {value: false}
+			lastRoll: {value: false},
+			rolls: {value: 0}
 		});
 	}
 
@@ -86,7 +89,7 @@ let Dice = (function () {
 	 * Roll the dielastRoll
 	 */
 	Constructor.prototype.roll = function() {			
-		let {sides, result, message, lastRoll} = this;
+		let {sides, result, message, lastRoll, rolls} = this;
 
 		// Create sides of the dice
 		let sidesArr = Array.from(new Array(sides)).map(function(item, index) {
@@ -96,8 +99,10 @@ let Dice = (function () {
 		// Roll the die
 		shuffle(sidesArr);
 		lastRoll = sidesArr[0];
+		rollCount++;
+		rolls = rollCount;
 		result.textContent = message.replace('{{roll}}', lastRoll);
-		this.onRoll(lastRoll, sides);
+		this.onRoll(lastRoll, sides, rolls);
 		return this;
 	};
 	
@@ -133,15 +138,18 @@ for (n of dice) {
 	for (i = 1; i <= n; i++) {
 		table.innerHTML += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
 	}
+	table.innerHTML += `<tr><th>Total Rolls</th><td data-roll-total>0</td></tr>`;
 	div.append(table);
 	app.append(div);
 }
 
-function counter(lastRoll, sides) {
+function counter(lastRoll, sides, rolls) {
 	let counter = document.querySelector(`[data-sides="${sides}"`);
 	if (!counter) return;
 	let cell = counter.querySelector(`[data-side="${lastRoll}"`);
 	if (!cell) return;
+	let total = counter.querySelector('[data-roll-total]');
+	total.innerHTML = rolls;
 	let num = parseInt(cell.innerText, 10);
 	num++;
 	console.log(num);
