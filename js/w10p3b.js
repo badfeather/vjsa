@@ -1,5 +1,5 @@
 let Dice = (function () {
-	let side = 0;
+	let rollCount = 0;
 	
 	/**
 	 * Randomly shuffle an array
@@ -96,7 +96,8 @@ let Dice = (function () {
 			sides: {value: sides},
 			message: {value: message},
 			listener: {value: listener},
-			lastRoll: {value: false}
+			lastRoll: {value: false},
+			rolls: {value: 0}
 		});
 	}
 
@@ -104,13 +105,14 @@ let Dice = (function () {
 	 * Roll the dielastRoll
 	 */
 	Constructor.prototype.roll = function() {
-		let {sides, result, message, lastRoll} = this;
+		let {sides, result, message, lastRoll, rolls} = this;
 		
 		let canceled = !emitEvent('dice:before-roll', {
 			sides: sides,
 			result: result,
 			message: message, 
-			lastRoll: lastRoll
+			lastRoll: lastRoll,
+			rolls: rolls
 		});	
 		if (canceled) return;	
 
@@ -122,13 +124,16 @@ let Dice = (function () {
 		// Roll the die
 		shuffle(sidesArr);
 		lastRoll = sidesArr[0];
+		rollCount++;
+		rolls = rollCount;
 		result.textContent = message.replace('{{roll}}', lastRoll);
 		
 		emitEvent('dice:roll', {
 			sides: sides,
 			result: result,
 			message: message, 
-			lastRoll: lastRoll
+			lastRoll: lastRoll,
+			rolls: rolls
 		});		
 		return this;
 	};
@@ -149,6 +154,8 @@ let Dice = (function () {
 		dice.removeEventListener('click', this.listener);
 		dice.setAttribute('disabled', '');
 		lastRoll = false;
+		rollCount = 0;
+		rolls = rollCount;
 		this.roll = null;
 		emitEvent('dice:destroy', {
 			sides: sides,
@@ -177,20 +184,24 @@ for (n of dice) {
 	for (i = 1; i <= n; i++) {
 		table.innerHTML += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
 	}
+	table.innerHTML += `<tr><th>Total Rolls</th><td data-roll-total>0</td></tr>`;
 	div.append(table);
 	app.append(div);
 }
 
 function counter(event) {
 	console.log(event);
-	let {sides, result, message, lastRoll} = event.detail;
+	let {sides, result, message, lastRoll, rolls} = event.detail;
 	let counter = document.querySelector(`[data-sides="${sides}"`);
 	if (!counter) return;
 	let cell = counter.querySelector(`[data-side="${lastRoll}"`);
+	let total = counter.querySelector('[data-roll-total]');
+	total.innerHTML = rolls;
 	if (!cell) return;
 	let num = parseInt(cell.innerText, 10);
 	num++;
-	console.log(num);
+	console.log(rolls);
+	//console.log(num);
 	cell.innerText = num;	
 }
 
