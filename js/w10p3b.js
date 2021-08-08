@@ -147,7 +147,7 @@ let Dice = (function () {
 function createCounterTable(event) {
 	let counters = document.getElementById('counters');
 	if (!counters) return;
-	let {dice, sides, result} = event.detail;
+	let {dice, sides} = event.detail;
 	let id = dice.id;
 	let div = document.createElement('div');
 	div.setAttribute('data-roll-results-for', id);
@@ -158,10 +158,7 @@ function createCounterTable(event) {
 		rows += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
 	}	
 	rows += `<tr><th>Total Rolls</th><td data-roll-totals-for="${id}">0</td></tr>`;
-	for (let i = 1; i <= sides; i++) {
-		table.innerHTML = rows;
-	}
-	
+	table.innerHTML = rows;	
 	div.append(table);
 	counters.append(div);
 }
