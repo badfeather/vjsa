@@ -99,8 +99,7 @@ let Dice = (function () {
 		// Roll the die
 		shuffle(sidesArr);
 		lastRoll = sidesArr[0];
-		rollCount++;
-		rolls = rollCount;
+		this.rolls = rolls + 1;
 		result.textContent = message.replace('{{roll}}', lastRoll);
 		this.onRoll(lastRoll, sides, rolls);
 		return this;

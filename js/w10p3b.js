@@ -1,6 +1,4 @@
-let Dice = (function () {
-	let rollCount = 0;
-	
+let Dice = (function () {	
 	/**
 	 * Randomly shuffle an array
 	 * https://stackoverflow.com/a/2450976/1293256
@@ -88,6 +86,7 @@ let Dice = (function () {
 		
 		// Listen for clicks
 		let listener = createListener(dice, this);
+		let rolls = 0;
 
 		// Create properties
 		Object.defineProperties(this, {
@@ -96,24 +95,20 @@ let Dice = (function () {
 			sides: {value: sides},
 			message: {value: message},
 			listener: {value: listener},
-			lastRoll: {value: false},
-			rolls: {value: 0}
+			rolls: {value: rolls, writable: true}
 		});
+		
+		// Emit event when the instance is ready
+		emitEvent('dice:ready', {dice, result, sides, message});
 	}
 
 	/**
-	 * Roll the dielastRoll
+	 * Roll the die
 	 */
 	Constructor.prototype.roll = function() {
-		let {sides, result, message, lastRoll, rolls} = this;
+		let {dice, sides, result, message, rolls} = this;
 		
-		let canceled = !emitEvent('dice:before-roll', {
-			sides: sides,
-			result: result,
-			message: message, 
-			lastRoll: lastRoll,
-			rolls: rolls
-		});	
+		let canceled = !emitEvent('dice:before-roll', {dice, sides, result, message});
 		if (canceled) return;	
 
 		// Create sides of the dice
@@ -123,18 +118,11 @@ let Dice = (function () {
 
 		// Roll the die
 		shuffle(sidesArr);
-		lastRoll = sidesArr[0];
-		rollCount++;
-		rolls = rollCount;
-		result.textContent = message.replace('{{roll}}', lastRoll);
-		
-		emitEvent('dice:roll', {
-			sides: sides,
-			result: result,
-			message: message, 
-			lastRoll: lastRoll,
-			rolls: rolls,
-		});		
+		let roll = sidesArr[0];
+		rolls += 1;
+		result.textContent = message.replace('{{roll}}', roll);
+		this.rolls = rolls;
+		emitEvent('dice:roll', {dice, sides, result, roll, rolls});
 		return this;
 	};
 	
@@ -142,68 +130,53 @@ let Dice = (function () {
 	 * Destroy this instance
 	 */
 	Constructor.prototype.destroy = function() {
-		let {dice, result, sides, message, lastRoll, rolls} = this;
-		let canceled = !emitEvent('dice:before-destroy', {
-			sides: sides,
-			result: result,
-			message: message, 
-			lastRoll: lastRoll,
-			rolls: rolls,
-		});	
+		let {dice, result, sides, message, listener} = this;
+		let canceled = !emitEvent('dice:before-destroy', {dice, sides, result});
 		if (canceled) return;	
 		result.textContent = '';
-		dice.removeEventListener('click', this.listener);
+		dice.removeEventListener('click', listener);
 		dice.setAttribute('disabled', '');
-		lastRoll = false;
-		rollCount = 0;
-		rolls = rollCount;
-		this.roll = null;
-		emitEvent('dice:destroy', {
-			sides: sides,
-			result: result,
-			message: message, 
-			lastRoll: lastRoll,
-			rolls: rolls,
-		});	
+		this.rolls = 0;
+		emitEvent('dice:destroy', {dice, sides, result});
 		return this;
 	}
 
 	return Constructor;
 })();
 
-let app = document.getElementById('app');
-let dice = [4,6,8,12,20];
-let div, h4, table, row, th, td, n, i;
-for (n of dice) {
-	div = document.createElement('div');
-	div.classList.add('roll-results');
-	h4 = document.createElement('h4');
-	h4.textContent = `D${n} rolls`;
-	div.append(h4);
-	table = document.createElement('table');
-	table.setAttribute('data-sides', n);
-	table.innerHTML = `<tr><th>Side</th><th>Count</th></tr>`;
-	for (i = 1; i <= n; i++) {
-		table.innerHTML += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
+function createCounterTable(event) {
+	let counters = document.getElementById('counters');
+	if (!counters) return;
+	let {dice, sides, result} = event.detail;
+	let id = dice.id;
+	let div = document.createElement('div');
+	div.setAttribute('data-roll-results-for', id);
+	let table = document.createElement('table');
+	table.setAttribute('data-sides', sides);
+	let rows = `<tr><th>Side</th><th>Count</th></tr>`;
+	for (let i = 1; i <= sides; i++) {
+		rows += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
+	}	
+	rows += `<tr><th>Total Rolls</th><td data-roll-totals-for="${id}">0</td></tr>`;
+	for (let i = 1; i <= sides; i++) {
+		table.innerHTML = rows;
 	}
-	table.innerHTML += `<tr><th>Total Rolls</th><td data-roll-total>0</td></tr>`;
+	
 	div.append(table);
-	app.append(div);
+	counters.append(div);
 }
 
 function counter(event) {
-	console.log(event);
-	let {sides, result, message, lastRoll, rolls} = event.detail;
-	let counter = document.querySelector(`[data-sides="${sides}"`);
+	let {dice, sides, result, roll, rolls} = event.detail;
+	let id = dice.id;
+	let counter = document.querySelector(`[data-roll-results-for="${id}"`);
 	if (!counter) return;
-	let cell = counter.querySelector(`[data-side="${lastRoll}"`);
-	let total = counter.querySelector('[data-roll-total]');
-	total.innerHTML = rolls;
-	if (!cell) return;
+	let cell = counter.querySelector(`[data-side="${roll}"`);
+	let total = counter.querySelector(`[data-roll-totals-for="${id}"]`);
+	if (!cell || !total) return;
+	total.innerText = rolls;
 	let num = parseInt(cell.innerText, 10);
 	num++;
-	console.log(rolls);
-	//console.log(num);
 	cell.innerText = num;	
 }
 
@@ -212,6 +185,7 @@ function destroyMessage(event) {
 	result.innerText = `d${sides} destroyed`;
 }
 
+document.addEventListener('dice:ready', createCounterTable);
 document.addEventListener('dice:roll', counter);
 document.addEventListener('dice:destroy', destroyMessage);
 
@@ -239,3 +213,5 @@ let d20 = new Dice('#d20', '#result', {
 	message: 'D20 roll: {{roll}}',
 	sides: 20,
 });
+
+
