@@ -148,13 +148,18 @@ function createCounterTable(event) {
 	let counters = document.getElementById('counters');
 	if (!counters) return;
 	let {dice, sides} = event.detail;
-	let id = dice.id;
-	let div = document.createElement('div');
+	let id = dice.id,
+		div = document.createElement('div'),
+		table = document.createElement('table'),
+		h3 = document.createElement('h3'),
+		rows,
+		i;
 	div.setAttribute('data-roll-results-for', id);
-	let table = document.createElement('table');
+	h3.innerText = `Roll Results for ${id.toUpperCase()}`;
+	div.append(h3);
 	table.setAttribute('data-sides', sides);
-	let rows = `<tr><th>Side</th><th>Count</th></tr>`;
-	for (let i = 1; i <= sides; i++) {
+	rows = `<tr><th>Side</th><th>Count</th></tr>`;
+	for (i = 1; i <= sides; i++) {
 		rows += `<tr><th>${i}</th><td data-side="${i}">0</td></tr>`;
 	}	
 	rows += `<tr><th>Total Rolls</th><td data-roll-totals-for="${id}">0</td></tr>`;
